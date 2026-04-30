@@ -9,7 +9,7 @@
  */
 
 /* ============ 설정 ============ */
-const ADMIN_PASSWORD = 'ekproject2026';   // ⬅ 운영 시 반드시 변경
+const ADMIN_PASSWORD = '0123456789';      // ⬅ 운영 시 반드시 변경
 const AUTH_KEY = 'ek_admin_auth';
 const AUTH_TTL_HOURS = 12;                 // 12시간 유지
 
