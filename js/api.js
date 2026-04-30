@@ -71,19 +71,13 @@ class TableApiAdapter {
 }
 
 /* ============================================
- * Adapter 2: Supabase (향후 사용 예정)
- * ============================================
- *
- * 사용 시점이 되면 아래 주석을 풀고 사용하세요.
- *
- * 사전 준비:
- *   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- *
+ * Adapter 2: Supabase (현재 사용)
+ * ============================================ */
 class SupabaseAdapter {
     constructor(tableName) {
         this.tableName = tableName;
-        const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
-        const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+        const SUPABASE_URL = 'https://pbiyyrrujhxnxwyujssi.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiaXl5cnJ1amh4bnh3eXVqc3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMjg0MTgsImV4cCI6MjA5MTgwNDQxOH0.LqzAZAL9nZcLsl4Va73jxwucfCiHkSCrx241TDmqw8Y';
         this.client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
@@ -136,12 +130,11 @@ class SupabaseAdapter {
         return true;
     }
 }
-*/
 
 /* ============================================
  * Public API
  * ============================================ */
-const SeminarAPI = new TableApiAdapter('seminars');
+const SeminarAPI = new SupabaseAdapter('seminars');
 
 /* 전역으로 노출 */
 window.SeminarAPI = SeminarAPI;
