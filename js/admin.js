@@ -254,6 +254,21 @@ async function handleSubmit(e) {
         return;
     }
 
+    /* 표시 순서 중복 검증 (자기 자신 제외) */
+    if (data.display_order !== 9999) {
+        try {
+            const allList = await SeminarAPI.list();
+            const dup = allList.find(s =>
+                Number(s.display_order) === data.display_order && s.id !== id
+            );
+            if (dup) {
+                showToast(`표시 순서 ${data.display_order}번은 이미 "${dup.title}"에서 사용 중입니다.`, 'error');
+                $('#formOrder').focus();
+                return;
+            }
+        } catch (_) { /* 검증 실패 시 무시하고 진행 */ }
+    }
+
     const saveBtn = $('#modalSaveBtn');
     saveBtn.disabled = true;
     saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 저장 중...';
