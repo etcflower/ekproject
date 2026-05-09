@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"from PIL import Image; img = Image.open\\(r'd:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\images\\\\hero.jpg'\\); print\\(img.size\\)\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"d:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\images\\\\hero.jpg\"\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))"
+    ]
+  }
+}

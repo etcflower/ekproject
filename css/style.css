@@ -155,9 +155,9 @@ section {
 
 .section-tag {
     display: inline-block;
-    font-size: 12px;
+    font-size: 24px;
     font-weight: 600;
-    letter-spacing: 2.5px;
+    letter-spacing: 5px;
     color: var(--color-text-light);
     margin-bottom: 16px;
 }
@@ -167,15 +167,15 @@ section {
 }
 
 .section-title {
-    font-size: 38px;
+    font-size: 52px;
     font-weight: 900;
-    line-height: 1.3;
+    line-height: 1.25;
     color: var(--color-text);
     letter-spacing: -0.03em;
 }
 
 .section-desc {
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 300;
     color: var(--color-text-sub);
     margin-top: 20px;
@@ -185,7 +185,7 @@ section {
 .section-desc small {
     display: inline-block;
     margin-top: 6px;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--color-text-light);
 }
 
@@ -281,29 +281,19 @@ main {
    ============================================ */
 .hero-section {
     position: relative;
-    height: 520px;
     padding: 0;
     overflow: hidden;
-    background: #f5f5f5;
 }
 
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(245, 245, 247, 0.4) 45%, rgba(245, 245, 247, 0.92) 70%, rgba(245, 245, 247, 0.98) 100%);
+.hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .hero-container {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -323,11 +313,11 @@ main {
 }
 
 .hero-title {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 900;
     line-height: 1.15;
     color: var(--color-text);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -383,17 +373,17 @@ main {
 
 .prs-tag {
     display: inline-block;
-    padding: 6px 18px;
+    padding: 8px 22px;
     border: 1px solid var(--color-primary);
     border-radius: 20px;
     color: var(--color-primary);
-    font-size: 13px;
+    font-size: 26px;
     font-weight: 600;
     margin-bottom: 24px;
 }
 
 .prs-text h2 {
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 300;
     line-height: 1.4;
     color: #fff;
@@ -405,7 +395,7 @@ main {
 }
 
 .prs-text p {
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.8;
@@ -600,10 +590,9 @@ main {
 
 .role-card {
     background: #fff;
-    border-top: 4px solid var(--color-primary);
-    border-radius: var(--radius);
-    padding: 32px 28px;
+    border-radius: 12px;
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
     transition: all 0.2s;
 }
 
@@ -612,60 +601,54 @@ main {
     box-shadow: var(--shadow-md);
 }
 
-.role-card-head {
+.role-card-badge {
+    background: var(--color-primary);
+    color: #fff;
     text-align: center;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 24px;
-}
-
-.role-num {
-    display: inline-block;
-    color: var(--color-primary);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    margin-bottom: 12px;
+    padding: 13px 0;
 }
 
-.role-card-head h3 {
+.role-card-body {
+    padding: 32px 28px;
+    text-align: center;
+}
+
+.role-title {
     font-size: 22px;
     font-weight: 800;
     color: var(--color-text);
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 }
 
-.role-sub {
+.role-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.role-tag {
+    background: var(--color-bg-soft);
+    color: var(--color-text-sub);
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+
+.role-desc {
     font-size: 14px;
     color: var(--color-text-sub);
-}
-
-.role-list {
-    margin-bottom: 24px;
-}
-
-.role-list li {
-    font-size: 14px;
-    color: var(--color-text-sub);
-    padding: 6px 0 6px 14px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.role-list li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .role-highlight {
     color: var(--color-primary);
     font-weight: 700;
-    font-size: 14px;
-    padding-top: 16px;
-    border-top: 1px dashed var(--color-border);
+    font-size: 15px;
 }
 
 /* ============================================
@@ -896,9 +879,9 @@ main {
 
 .seminar-card {
     background: #fff;
-    border: 2px solid var(--color-border);
+    border: 2px solid var(--color-navy);
     border-radius: var(--radius);
-    padding: 32px 28px;
+    padding: 28px 24px;
     display: flex;
     flex-direction: column;
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -908,6 +891,20 @@ main {
     border-color: var(--color-primary);
     box-shadow: 0 8px 24px rgba(255, 107, 26, 0.15);
     transform: translateY(-4px);
+}
+
+.seminar-card:hover .badge-open {
+    background: rgba(255, 107, 26, 0.12);
+    color: var(--color-primary);
+}
+
+.seminar-card:hover .seminar-time-text {
+    color: var(--color-primary);
+}
+
+.seminar-card:hover .btn-primary.seminar-btn {
+    background: var(--color-primary);
+    box-shadow: 0 6px 16px rgba(255, 107, 26, 0.35);
 }
 
 /* 마감: 살짝 흐리게, hover 효과 약하게 */
@@ -931,50 +928,6 @@ main {
     transform: translateY(-2px);
 }
 
-.seminar-date-large {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--color-text);
-    margin-bottom: 8px;
-}
-
-.seminar-time-status {
-    font-size: 14px;
-    color: var(--color-primary);
-    font-weight: 600;
-    margin-bottom: 20px;
-    min-height: 20px;
-}
-
-.seminar-meta {
-    flex: 1;
-    margin-bottom: 24px;
-}
-
-.seminar-meta-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: var(--color-text-sub);
-    line-height: 1.6;
-}
-
-.seminar-meta-item i {
-    color: var(--color-text-light);
-    margin-top: 4px;
-    width: 14px;
-    flex-shrink: 0;
-}
-
-.seminar-meta-item strong {
-    color: var(--color-text);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 2px;
-}
-
 /* 상태 배지 */
 .seminar-status-badge {
     display: inline-block;
@@ -983,16 +936,13 @@ main {
     letter-spacing: 0.5px;
     padding: 4px 10px;
     border-radius: 20px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     align-self: flex-start;
 }
 .badge-open {
-    background: rgba(255, 107, 26, 0.12);
-    color: var(--color-primary);
-}
-.badge-upcoming {
-    background: rgba(31, 15, 114, 0.08);
+    background: rgba(31, 15, 114, 0.1);
     color: var(--color-navy);
+    transition: background 0.25s ease, color 0.25s ease;
 }
 .badge-closed,
 .badge-ended {
@@ -1000,10 +950,74 @@ main {
     color: var(--color-text-light);
 }
 
+/* 날짜 + 시간 한 줄 */
+.seminar-date-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.seminar-date-large {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.seminar-time-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-navy);
+    transition: color 0.25s ease;
+}
+
+.seminar-meta {
+    flex: 1;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.seminar-meta-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--color-text-sub);
+    line-height: 1.5;
+}
+
+.seminar-meta-item i {
+    color: var(--color-text-light);
+    margin-top: 3px;
+    width: 14px;
+    flex-shrink: 0;
+}
+
+.seminar-meta-text strong {
+    color: var(--color-text);
+    font-weight: 600;
+    display: block;
+}
+
+.seminar-address {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-top: 2px;
+}
+
 .seminar-card .btn {
     width: 100%;
     padding: 14px;
     font-size: 15px;
+}
+
+/* 기본 상태: 신청 버튼 네이비 */
+.seminar-card .btn-primary.seminar-btn {
+    background: var(--color-navy);
+    box-shadow: none;
 }
 
 .seminar-btn {
@@ -1039,25 +1053,198 @@ main {
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 20px 28px;
+    overflow: hidden;
 }
 
-.seminar-notice p {
+.seminar-notice-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.seminar-notice-summary::-webkit-details-marker { display: none; }
+
+.notice-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 14px;
+    font-weight: 600;
     color: var(--color-text);
+}
+
+.notice-summary-left i {
+    color: var(--color-primary);
+    font-size: 16px;
+}
+
+.notice-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.notice-chevron {
+    transition: transform 0.25s ease;
+}
+
+.seminar-notice[open] .notice-chevron {
+    transform: rotate(180deg);
+}
+
+.seminar-notice[open] .notice-toggle-label::before {
+    content: '접기';
+}
+
+.notice-toggle-label::before {
+    content: '자세히 보기';
+}
+
+.notice-toggle-label .fas { font-size: 11px; }
+
+.seminar-notice-detail {
+    border-top: 1px solid var(--color-border);
+}
+
+.notice-consult {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-soft2);
+}
+
+.notice-consult p {
+    font-size: 13px;
+    color: var(--color-text-sub);
     line-height: 1.7;
 }
 
-.seminar-notice p i {
-    color: var(--color-primary);
-    margin-right: 8px;
+.notice-consult p:first-child {
+    color: var(--color-text);
+    margin-bottom: 4px;
 }
 
-.seminar-notice-sub {
-    color: var(--color-text-sub) !important;
-    font-size: 13px !important;
-    margin-top: 6px;
-    padding-left: 22px;
+.notice-section-head {
+    background: var(--color-navy);
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notice-section-head i {
+    color: var(--color-primary);
+}
+
+.notice-address {
+    background: var(--color-bg-soft);
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.notice-address i {
+    color: var(--color-primary);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.notice-routes {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.route-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.route-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--color-primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary);
+    font-size: 13px;
+}
+
+.route-item strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 3px;
+}
+
+.route-item p {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    line-height: 1.7;
+}
+
+.notice-caution {
+    padding: 18px 24px;
+    background: var(--color-bg-soft2);
+}
+
+.caution-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-sub);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.caution-title i { color: var(--color-primary); }
+
+.notice-caution ol {
+    list-style: none;
+    counter-reset: caution-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.notice-caution ol li {
+    counter-increment: caution-counter;
+    font-size: 13px;
+    color: var(--color-text-sub);
+    line-height: 1.6;
+    padding-left: 20px;
+    position: relative;
+}
+
+.notice-caution ol li::before {
+    content: counter(caution-counter) ".";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-light);
+    font-weight: 700;
 }
 
 /* ============================================
@@ -1242,11 +1429,11 @@ main {
     }
 
     .section-title {
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .hero-title {
-        font-size: 42px;
+        font-size: 48px;
     }
 
     .prs-block {
@@ -1254,7 +1441,7 @@ main {
     }
 
     .prs-text h2 {
-        font-size: 28px;
+        font-size: 36px;
     }
 
     .about-icon-grid,
@@ -1286,11 +1473,11 @@ main {
     }
 
     .section-title {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .section-desc {
-        font-size: 14px;
+        font-size: 17px;
     }
 
     .mt-100 {
@@ -1331,27 +1518,37 @@ main {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Hero */
+    /* Hero - 배경 우측 절반, 텍스트 우측 오버레이 */
     .hero-section {
-        height: auto;
-        padding: 80px 0 60px;
+        height: 200px;
     }
 
-    .hero-overlay {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(245, 245, 247, 0.95) 60%);
-    }
-
-    .hero-container {
-        justify-content: center;
+    .hero-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center;
     }
 
     .hero-content {
-        text-align: center;
-        max-width: 100%;
+        max-width: 65%;
+    }
+
+    .hero-tag {
+        font-size: 13px;
+        margin-bottom: 8px;
     }
 
     .hero-title {
-        font-size: 32px;
+        font-size: 24px;
+        margin-bottom: 14px;
+    }
+
+    .hero-cta {
+        font-size: 13px;
+        padding: 11px 14px;
     }
 
     /* PRS */
@@ -1366,7 +1563,35 @@ main {
     }
 
     .prs-text h2 {
-        font-size: 24px;
+        font-size: 28px;
+    }
+
+    .prs-cta {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* About */
+    .about-icon-card {
+        padding: 28px 20px;
+    }
+
+    .about-num-card {
+        padding: 24px 20px;
+    }
+
+    /* Curriculum table - 수평 스크롤 허용 */
+    .curriculum-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .curriculum-table thead th,
+    .curriculum-table tbody th,
+    .curriculum-table tbody td {
+        padding: 12px 10px;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
     /* Grids */
@@ -1383,11 +1608,9 @@ main {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Curriculum table */
-    .curriculum-table thead th,
-    .curriculum-table tbody th,
-    .curriculum-table tbody td {
-        padding: 14px 10px;
+    /* Revenue tabs */
+    .revenue-tab {
+        padding: 9px 14px;
         font-size: 13px;
     }
 
@@ -1408,6 +1631,21 @@ main {
         font-size: 16px;
     }
 
+    /* Seminar notice summary - 좁은 화면 대응 */
+    .seminar-notice-summary {
+        padding: 12px 18px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .notice-summary-left {
+        font-size: 13px;
+    }
+
+    .notice-toggle-label {
+        font-size: 12px;
+    }
+
     /* Process CTA */
     .process-cta-box {
         padding: 32px 24px;
@@ -1422,9 +1660,27 @@ main {
         align-items: stretch;
     }
 
+    /* 가맹 정보 항목 - 세로 배치 */
     .cta-info-list {
-        gap: 18px;
+        flex-direction: column;
+        gap: 12px;
         margin-bottom: 8px;
+    }
+
+    .cta-info-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .cta-info-label {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .cta-info-value {
+        text-align: right;
     }
 
     .process-cta-info .btn {
@@ -1434,6 +1690,61 @@ main {
     /* Footer */
     .footer-inner {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ===== 소형 모바일 (480px 이하) ===== */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 26px;
+    }
+
+    .hero-title {
+        font-size: 18px;
+    }
+
+    .hero-tag {
+        font-size: 11px;
+    }
+
+    .hero-cta {
+        font-size: 11px;
+        padding: 9px 12px;
+    }
+
+    .prs-text h2 {
+        font-size: 24px;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-cta-box {
+        padding: 28px 20px;
+    }
+
+    .process-cta-text h3 {
+        font-size: 20px;
+    }
+
+    .revenue-tabs {
+        gap: 6px;
+    }
+
+    .revenue-tab {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 9px 10px;
+    }
+
+    .cta-info-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cta-info-value {
+        text-align: left;
     }
 }
 

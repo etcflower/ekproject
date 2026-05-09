@@ -82,12 +82,18 @@ async function loadSeminars() {
 
     try {
         const list = await SeminarAPI.list();
-        /* display_order 1→2→3 순 정렬, 최대 3개 */
-        const sorted = list
-            .sort((a, b) => (a.display_order ?? 9999) - (b.display_order ?? 9999))
+
+        /* display_order=1(공개)만 필터 → 날짜 오름차순 → 최대 3개 */
+        const visible = list
+            .filter(item => item.display_order === 1)
+            .sort((a, b) => {
+                const da = a.seminar_date || '9999-99-99';
+                const db = b.seminar_date || '9999-99-99';
+                return da.localeCompare(db);
+            })
             .slice(0, 3);
 
-        if (!sorted.length) {
+        if (!visible.length) {
             container.innerHTML = `
                 <div class="seminar-empty">
                     <i class="far fa-calendar-times"></i>
@@ -96,8 +102,7 @@ async function loadSeminars() {
             return;
         }
 
-        /* 모든 카드 동일 기본 스타일 — hover 시 강조 효과는 CSS에서 처리 */
-        container.innerHTML = sorted
+        container.innerHTML = visible
             .map((item) => renderSeminarCard(item))
             .join('');
     } catch (err) {
@@ -109,25 +114,49 @@ async function loadSeminars() {
     }
 }
 
+/* ===== 상태 자동 결정 =====
+ * 우선순위: 수동 마감 > 자동 접수중 > 자동 종료
+ * - DB status = '마감' → 마감 (수동 우선)
+ * - seminar_date가 오늘 이후 → 접수중 (자동)
+ * - seminar_date가 오늘 이전 → 종료 (자동)
+ */
+function resolveStatus(item) {
+    if (item.status === '마감') return '마감';
+    if (item.seminar_date) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const seminarDate = new Date(item.seminar_date);
+        seminarDate.setHours(0, 0, 0, 0);
+        if (seminarDate < today) return '종료';
+    }
+    return '접수중';
+}
+
 /* ===== 세미나 카드 렌더 ===== */
 function renderSeminarCard(item) {
-    const status = item.status || '예정';
+    const status = resolveStatus(item);
     const dateText = formatSeminarDate(item.seminar_date);
     const timeText = item.seminar_time ? escapeHtml(item.seminar_time) : '';
-    const rawLocation = item.location || '';
-    const capacityText = formatCapacity(item);
+    const locationName = escapeHtml((item.location || '').trim());
+    const address = escapeHtml((item.description || '').trim());
+    const capacityText = formatCapacity(item, status);
     const applyLink = escapeHtml(item.apply_link || '#');
 
     return `
         <article class="seminar-card status-${escapeHtml(status)}">
             ${getStatusBadge(status)}
-            <div class="seminar-date-large">${dateText}</div>
-            ${timeText ? `<div class="seminar-time-status">${timeText}</div>` : '<div class="seminar-time-status"></div>'}
+            <div class="seminar-date-row">
+                <span class="seminar-date-large">${dateText}</span>
+                ${timeText ? `<span class="seminar-time-text">${timeText}</span>` : ''}
+            </div>
             <div class="seminar-meta">
-                ${rawLocation ? `
+                ${locationName ? `
                     <div class="seminar-meta-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>${rawLocation.split('\n').map(l => escapeHtml(l)).join('<br>')}</span>
+                        <div class="seminar-meta-text">
+                            <strong>${locationName}</strong>
+                            ${address ? `<span class="seminar-address">${address}</span>` : ''}
+                        </div>
                     </div>
                 ` : ''}
                 ${capacityText ? `
@@ -146,26 +175,23 @@ function renderSeminarCard(item) {
 function getStatusBadge(status) {
     const map = {
         '접수중': '<span class="seminar-status-badge badge-open">접수중</span>',
-        '예정':   '<span class="seminar-status-badge badge-upcoming">예정</span>',
         '마감':   '<span class="seminar-status-badge badge-closed">마감</span>',
         '종료':   '<span class="seminar-status-badge badge-ended">종료</span>',
     };
-    return map[status] || `<span class="seminar-status-badge badge-upcoming">${escapeHtml(status)}</span>`;
+    return map[status] || `<span class="seminar-status-badge badge-open">${escapeHtml(status)}</span>`;
 }
 
 /* ===== 상태별 버튼 ===== */
 function getStatusButton(status, applyLink) {
     switch (status) {
         case '접수중':
-            return `<a href="${applyLink}" class="btn btn-primary seminar-btn">지금 신청하기 <i class="fas fa-chevron-right"></i></a>`;
-        case '예정':
-            return `<button class="btn btn-navy seminar-btn" disabled>신청 예정</button>`;
+            return `<a href="${applyLink}" class="btn btn-primary seminar-btn">지금 신청하기</a>`;
         case '마감':
             return `<button class="btn btn-seminar-closed seminar-btn" disabled>마감</button>`;
         case '종료':
             return `<button class="btn btn-seminar-closed seminar-btn" disabled>종료</button>`;
         default:
-            return `<a href="${applyLink}" class="btn btn-navy seminar-btn">신청하기</a>`;
+            return `<a href="${applyLink}" class="btn btn-primary seminar-btn">지금 신청하기</a>`;
     }
 }
 
@@ -177,12 +203,12 @@ function formatSeminarDate(dateStr) {
     return escapeHtml(dateStr);
 }
 
-function formatCapacity(item) {
-    if (item.status === '마감') return '접수가 마감되었습니다';
-    if (item.status === '종료') return '종료된 일정입니다';
+function formatCapacity(item, status) {
+    if (status === '마감') return '접수 마감';
+    if (status === '종료') return '';
     if (!item.seminar_date) return '사전 신청시 우선 안내';
-    if (item.capacity) return `잔여 좌석 ${item.capacity}석`;
-    return '';
+    if (item.capacity > 0) return `잔여 좌석 ${item.capacity}석`;
+    return '선착순 신청 마감';
 }
 
 function escapeHtml(str) {

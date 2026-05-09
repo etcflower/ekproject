@@ -56,7 +56,7 @@
                 <div class="admin-page-head">
                     <div>
                         <h1>설명회 일정 관리</h1>
-                        <p>메인 페이지의 설명회 카드는 표시 순서(display_order)가 낮은 3개가 자동 노출됩니다.</p>
+                        <p>공개(1)로 설정된 일정 중 날짜 오름차순으로 메인 페이지에 최대 3개 노출됩니다.</p>
                     </div>
                     <button id="newSeminarBtn" class="btn btn-primary">
                         <i class="fas fa-plus"></i> 새 일정 등록
@@ -70,15 +70,15 @@
                         <div class="stat-value" id="statTotal">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">접수중</div>
+                        <div class="stat-label">공개</div>
                         <div class="stat-value" id="statOpen">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">예정</div>
+                        <div class="stat-label">비공개</div>
                         <div class="stat-value" id="statUpcoming">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">마감/종료</div>
+                        <div class="stat-label">마감</div>
                         <div class="stat-value" id="statClosed">-</div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th style="width:60px;">순서</th>
+                                <th style="width:60px;">공개</th>
                                 <th>제목</th>
                                 <th style="width:120px;">날짜</th>
                                 <th style="width:80px;">시간</th>
@@ -137,28 +137,34 @@
                 </div>
 
                 <div class="form-row">
-                    <label>장소</label>
-                    <input type="text" id="formLocation" placeholder="예) 서울 강남구 본사 대회의실">
+                    <label>장소명</label>
+                    <input type="text" id="formLocation" placeholder="예) EK프로젝트 개신점">
+                </div>
+
+                <div class="form-row">
+                    <label>주소</label>
+                    <input type="text" id="formDescription" placeholder="예) 충북 청주시 서원구 개신동 700번지">
                 </div>
 
                 <div class="form-row-grid">
                     <div class="form-row">
-                        <label>정원</label>
-                        <input type="number" id="formCapacity" min="0" placeholder="예) 30">
+                        <label>정원 <span class="form-hint">(0 = 선착순 신청 마감)</span></label>
+                        <input type="number" id="formCapacity" min="0" placeholder="0">
                     </div>
                     <div class="form-row">
-                        <label>표시 순서</label>
-                        <input type="number" id="formOrder" min="1" placeholder="숫자가 낮을수록 메인에 먼저 노출 (상위 3개 표시)">
+                        <label>공개 여부</label>
+                        <select id="formOrder">
+                            <option value="1">공개</option>
+                            <option value="0">비공개</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <label>상태</label>
+                    <label>상태 <span class="form-hint">(날짜 기준 자동 / 마감만 수동)</span></label>
                     <select id="formStatus">
-                        <option value="예정">예정</option>
-                        <option value="접수중">접수중</option>
-                        <option value="마감">마감</option>
-                        <option value="종료">종료</option>
+                        <option value="접수중">자동 (날짜 기준)</option>
+                        <option value="마감">마감 (수동)</option>
                     </select>
                 </div>
 
@@ -171,11 +177,6 @@
                         <label>신청 링크</label>
                         <input type="text" id="formApplyLink" placeholder="# 또는 URL">
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <label>설명</label>
-                    <textarea id="formDescription" rows="4" placeholder="세미나에 대한 상세 설명을 입력하세요."></textarea>
                 </div>
 
                 <div class="modal-actions">

@@ -113,7 +113,7 @@ async function loadList() {
     try {
         const list = await SeminarAPI.list();
         const sorted = list.sort((a, b) =>
-            (a.display_order ?? 9999) - (b.display_order ?? 9999)
+            (a.seminar_date || '9999-99-99').localeCompare(b.seminar_date || '9999-99-99')
         );
         renderTable(sorted);
         renderStats(sorted);
@@ -137,10 +137,11 @@ function renderTable(list) {
         return;
     }
     tableBody.innerHTML = list.map(item => {
-        const status = item.status || '예정';
+        const status = item.status || '접수중';
+        const isPublic = item.display_order === 1;
         return `
             <tr>
-                <td>${item.display_order ?? '-'}</td>
+                <td>${isPublic ? '공개' : '비공개'}</td>
                 <td><strong>${escapeHtml(item.title || '')}</strong></td>
                 <td>${escapeHtml(item.seminar_date || '')}</td>
                 <td>${escapeHtml(item.seminar_time || '')}</td>
@@ -171,12 +172,12 @@ function renderTable(list) {
 
 function renderStats(list) {
     const total = list.length;
-    const open = list.filter(x => x.status === '접수중').length;
-    const upcoming = list.filter(x => x.status === '예정').length;
-    const closed = list.filter(x => x.status === '마감' || x.status === '종료').length;
+    const pubCount = list.filter(x => x.display_order === 1).length;
+    const hidCount = list.filter(x => x.display_order !== 1).length;
+    const closed = list.filter(x => x.status === '마감').length;
     $('#statTotal').textContent = total;
-    $('#statOpen').textContent = open;
-    $('#statUpcoming').textContent = upcoming;
+    $('#statOpen').textContent = pubCount;
+    $('#statUpcoming').textContent = hidCount;
     $('#statClosed').textContent = closed;
 }
 
@@ -192,11 +193,11 @@ async function openModal(id = null) {
             $('#formId').value = item.id;
             $('#formTitle').value = item.title || '';
             $('#formDate').value = item.seminar_date || '';
-            $('#formTime').value = item.seminar_time || '';
+            $('#formTime').value = (item.seminar_time || '').replace('~', '');
             $('#formLocation').value = item.location || '';
-            $('#formCapacity').value = item.capacity ?? '';
-            $('#formOrder').value = item.display_order ?? '';
-            $('#formStatus').value = item.status || '예정';
+            $('#formCapacity').value = item.capacity ?? 0;
+            $('#formOrder').value = item.display_order === 0 ? '0' : '1';
+            $('#formStatus').value = item.status === '마감' ? '마감' : '접수중';
             $('#formDetailLink').value = item.detail_link || '#';
             $('#formApplyLink').value = item.apply_link || '#';
             $('#formDescription').value = item.description || '';
@@ -206,26 +207,15 @@ async function openModal(id = null) {
         }
     } else {
         modalTitle.textContent = '새 일정 등록';
-        $('#formStatus').value = '예정';
+        $('#formStatus').value = '접수중';
+        $('#formOrder').value = '1';
+        $('#formCapacity').value = '0';
         $('#formDetailLink').value = '#';
         $('#formApplyLink').value = '#';
-        // 다음 표시 순서 자동 추천
-        $('#formOrder').value = await suggestNextOrder();
     }
 
     modal.style.display = 'flex';
     setTimeout(() => $('#formTitle').focus(), 50);
-}
-
-async function suggestNextOrder() {
-    try {
-        const list = await SeminarAPI.list();
-        const max = list.reduce((m, x) =>
-            Math.max(m, x.display_order ?? 0), 0);
-        return max + 1;
-    } catch {
-        return 1;
-    }
 }
 
 function closeModal() {
@@ -239,10 +229,10 @@ async function handleSubmit(e) {
     const data = {
         title: $('#formTitle').value.trim(),
         seminar_date: $('#formDate').value,
-        seminar_time: $('#formTime').value,
+        seminar_time: $('#formTime').value ? $('#formTime').value + '~' : '',
         location: $('#formLocation').value.trim(),
-        capacity: $('#formCapacity').value ? Number($('#formCapacity').value) : 0,
-        display_order: $('#formOrder').value ? Number($('#formOrder').value) : 9999,
+        capacity: Number($('#formCapacity').value) || 0,
+        display_order: Number($('#formOrder').value),
         status: $('#formStatus').value,
         detail_link: $('#formDetailLink').value.trim() || '#',
         apply_link: $('#formApplyLink').value.trim() || '#',
@@ -252,21 +242,6 @@ async function handleSubmit(e) {
     if (!data.title || !data.seminar_date) {
         showToast('제목과 날짜는 필수입니다.', 'error');
         return;
-    }
-
-    /* 표시 순서 중복 검증 (자기 자신 제외) */
-    if (data.display_order !== 9999) {
-        try {
-            const allList = await SeminarAPI.list();
-            const dup = allList.find(s =>
-                Number(s.display_order) === data.display_order && s.id !== id
-            );
-            if (dup) {
-                showToast(`표시 순서 ${data.display_order}번은 이미 "${dup.title}"에서 사용 중입니다.`, 'error');
-                $('#formOrder').focus();
-                return;
-            }
-        } catch (_) { /* 검증 실패 시 무시하고 진행 */ }
     }
 
     const saveBtn = $('#modalSaveBtn');
