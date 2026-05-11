@@ -167,8 +167,9 @@ section {
 }
 
 .section-title {
+    font-family: 'Paperlogy', 'Pretendard', sans-serif;
     font-size: 52px;
-    font-weight: 900;
+    font-weight: 700;
     line-height: 1.25;
     color: var(--color-text);
     letter-spacing: -0.03em;
@@ -307,14 +308,16 @@ main {
 .hero-tag {
     font-size: 18px;
     font-weight: 500;
-    color: var(--color-text-sub);
-    margin-bottom: 10px;
+    color: #fff;
+    margin-bottom: 4px;
     letter-spacing: 0.05em;
+    text-shadow: 0px 0px 10px gray;
 }
 
 .hero-title {
+    font-family: 'Paperlogy', 'Pretendard', sans-serif;
     font-size: 64px;
-    font-weight: 900;
+    font-weight: 700;
     line-height: 1.15;
     color: var(--color-text);
     margin-bottom: 24px;
@@ -324,19 +327,31 @@ main {
     letter-spacing: -0.04em;
 }
 
-.hero-line-1,
+.hero-line-1 {
+    display: block;
+    color: #fff;
+    text-shadow: 0px 0px 6px gray;
+}
 .hero-line-2 {
     display: block;
+
+}
+
+.hero-thin {
+    font-weight: 400;
+    color: #fff;
 }
 
 .hero-orange {
     color: var(--color-primary);
+    font-weight: 700;
 }
 
-.hero-thin {
-    font-weight: 200;
-    color: var(--color-text-sub);
+.hero-orange-thin {
+    color: var(--color-primary);
+    font-weight: 400;
 }
+
 
 .hero-cta {
     width: 100%;
@@ -373,16 +388,17 @@ main {
 
 .prs-tag {
     display: inline-block;
-    padding: 8px 22px;
+    padding: 4px 18px;
     border: 1px solid var(--color-primary);
     border-radius: 20px;
     color: var(--color-primary);
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 24px;
 }
 
 .prs-text h2 {
+    font-family: 'Paperlogy', 'Pretendard', sans-serif;
     font-size: 48px;
     font-weight: 300;
     line-height: 1.4;
@@ -391,7 +407,8 @@ main {
 }
 
 .prs-text h2 strong {
-    font-weight: 900;
+    font-family: 'Paperlogy', 'Pretendard', sans-serif;
+    font-weight: 700;
 }
 
 .prs-text p {
@@ -422,7 +439,11 @@ main {
    04. ABOUT EK
    ============================================ */
 .about-section {
-    background: #fff;
+    background: #ffffff;
+}
+
+.about-section-2 {
+    background: #F5F6F8;
 }
 
 .about-icon-grid {
@@ -435,8 +456,10 @@ main {
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 40px 24px;
-    text-align: center;
+    padding: 28px 24px 88px;
+    text-align: left;
+    position: relative;
+    box-shadow: var(--shadow-sm);
     transition: all 0.2s;
 }
 
@@ -447,14 +470,16 @@ main {
 }
 
 .about-icon {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
 }
 
 .about-icon img {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
@@ -462,13 +487,13 @@ main {
     font-size: 17px;
     font-weight: 800;
     margin-bottom: 10px;
-    color: var(--color-text);
+    color: var(--color-primary);
     letter-spacing: -0.01em;
 }
 
 .about-icon-card p {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-text-sub);
     line-height: 1.7;
 }
@@ -485,46 +510,49 @@ main {
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 36px 28px;
-    text-align: center;
+    padding: 28px 24px;
+    text-align: left;
+    box-shadow: var(--shadow-sm);
     transition: all 0.2s;
 }
 
 .about-num-card:hover {
     border-color: var(--color-primary);
     box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
 }
 
-.about-num {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 18px;
-}
-
-.about-num img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.about-num-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #fff;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
 }
 
 .about-num-card h3 {
     font-size: 17px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: var(--color-text);
+    letter-spacing: -0.01em;
 }
 
 .about-num-card p {
     font-size: 14px;
     color: var(--color-text-sub);
     line-height: 1.7;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .about-num-card p.highlight {
     color: var(--color-primary);
     font-weight: 600;
-    margin-top: 12px;
+    margin-top: 14px;
     margin-bottom: 0;
 }
 
@@ -579,7 +607,7 @@ main {
    05. OPERATION (3타입 강사)
    ============================================ */
 .operation-section {
-    background: var(--color-bg-soft2);
+    background: #ffffff;
 }
 
 .role-grid {
@@ -655,7 +683,7 @@ main {
    06. REVENUE
    ============================================ */
 .revenue-section {
-    background: var(--color-bg-soft);
+    background: #F5F6F8;
 }
 
 .revenue-tabs {
@@ -780,7 +808,7 @@ main {
    07. SUPPORT (4단계)
    ============================================ */
 .support-section {
-    background: #fff;
+    background: linear-gradient(180deg, #ffffff 0%, #FFE0D1 100%);
 }
 
 .support-grid {
@@ -792,10 +820,13 @@ main {
 .support-card {
     background: #fff;
     border: 1px solid var(--color-border);
-    border-top: 4px solid var(--color-primary);
     border-radius: var(--radius);
-    padding: 28px 24px;
+    padding: 24px;
+    position: relative;
+    box-shadow: var(--shadow-sm);
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
 .support-card:hover {
@@ -803,27 +834,30 @@ main {
     box-shadow: var(--shadow-md);
 }
 
-.support-card-head {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 20px;
-}
-
 .step-num {
-    display: inline-block;
-    color: var(--color-primary);
-    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    margin-bottom: 10px;
+    padding: 6px 14px;
+    border-radius: 0 var(--radius) 0 8px;
+}
+
+.support-card-head {
+    text-align: left;
+    margin-top: 28px;
+    margin-bottom: 16px;
 }
 
 .support-card-head h3 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 800;
     color: var(--color-text);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .step-sub {
@@ -834,13 +868,13 @@ main {
 
 .step-list {
     margin-bottom: 20px;
-    min-height: 90px;
+    flex: 1;
 }
 
 .step-list li {
     font-size: 13px;
     color: var(--color-text-sub);
-    padding: 5px 0 5px 12px;
+    padding: 5px 0 5px 14px;
     position: relative;
     line-height: 1.6;
 }
@@ -856,9 +890,10 @@ main {
 .step-highlight {
     color: var(--color-primary);
     font-weight: 700;
-    font-size: 13px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--color-border);
+    font-size: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
     line-height: 1.5;
 }
 
@@ -866,7 +901,7 @@ main {
    08. SEMINAR
    ============================================ */
 .seminar-section {
-    background: var(--color-bg-soft);
+    background: #ffffff;
 }
 
 .seminar-grid {
@@ -1116,8 +1151,11 @@ main {
 
 .notice-consult {
     padding: 18px 24px;
-    border-bottom: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
     background: var(--color-bg-soft2);
+    margin-top: 20px;
+    margin-bottom: 12px;
 }
 
 .notice-consult p {
@@ -1132,8 +1170,7 @@ main {
 }
 
 .notice-section-head {
-    background: var(--color-navy);
-    color: #fff;
+    color: #1a1a1a;
     padding: 12px 24px;
     font-size: 14px;
     font-weight: 700;
@@ -1251,7 +1288,7 @@ main {
    09. PROCESS
    ============================================ */
 .process-section {
-    background: #fff;
+    background: #F5F6F8;
 }
 
 .process-grid {
@@ -1529,7 +1566,7 @@ main {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: right center;
+        object-position: center;
     }
 
     .hero-content {
@@ -1708,7 +1745,7 @@ main {
     }
 
     .hero-cta {
-        font-size: 11px;
+        font-size: 8px;
         padding: 9px 12px;
     }
 
@@ -1814,4 +1851,575 @@ main {
     .float-kakao i {
         font-size: 22px;
     }
+}
+
+/* ============================================
+   11. DIAGNOSIS MODAL (30초 수익구조 진단)
+   ============================================ */
+
+/* 세미나 섹션 진단 유도 박스 */
+.diag-promo {
+    margin-top: 24px;
+    padding: 20px 28px;
+    background: rgba(31, 15, 114, 0.04);
+    border: 1px solid rgba(31, 15, 114, 0.14);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.diag-promo-text p:first-child {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 4px;
+}
+
+.diag-promo-text p:last-child {
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+    animation: modalSlideUp 0.28s ease;
+}
+
+@keyframes modalSlideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* 모달 헤더 */
+.modal-head {
+    background: var(--color-navy);
+    padding: 22px 24px 20px;
+    position: relative;
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-head-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.modal-head-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    padding-right: 36px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* 모달 바디 */
+.modal-body {
+    padding: 24px;
+}
+
+/* 진행 바 */
+.diag-progress {
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.diag-progress-bar {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+/* 선택 옵션 */
+.diag-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.diag-option {
+    padding: 14px 18px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    line-height: 1.45;
+}
+
+.diag-option:hover {
+    border-color: var(--color-navy);
+    background: rgba(31, 15, 114, 0.04);
+}
+
+.diag-option.selected {
+    border-color: var(--color-navy);
+    background: var(--color-navy);
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 제출 / 다음 버튼 */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Pretendard', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 107, 26, 0.35);
+}
+
+.btn-submit:disabled {
+    background: var(--color-border);
+    color: var(--color-text-light);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 결과 박스 */
+.diag-result-box {
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+}
+
+.drb-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    background: var(--color-navy);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+.drb-text {
+    font-size: 14px;
+    color: var(--color-text-sub);
+    line-height: 1.75;
+}
+
+.drb-crisis { margin-bottom: 10px; }
+
+.drb-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 12px 0;
+}
+
+.drb-solution {
+    color: var(--color-navy);
+    font-weight: 700;
+}
+
+.diag-urgency {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: left;
+    padding: 14px 16px;
+    background: rgba(255, 107, 26, 0.08);
+    border-radius: 8px;
+    margin-bottom: 14px;
+}
+
+.diag-result-highlight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--color-navy);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+}
+
+.drh-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.drh-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-align: right;
+}
+
+/* 결과 하단 상담 폼 */
+.modal-form-section {
+    border-top: 1px solid var(--color-border);
+    padding-top: 20px;
+}
+
+.diag-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.diag-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.diag-form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.diag-form-input,
+.diag-form-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: var(--color-text);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.diag-form-input:focus,
+.diag-form-select:focus {
+    border-color: var(--color-navy);
+}
+
+.diag-agree-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--color-text-sub);
+    line-height: 1.6;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.diag-agree-check {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    accent-color: var(--color-navy);
+    cursor: pointer;
+}
+
+/* 완료 화면 */
+.modal-success {
+    padding: 56px 32px;
+    text-align: center;
+}
+
+.modal-success-icon {
+    font-size: 52px;
+    color: var(--color-navy);
+    margin-bottom: 16px;
+}
+
+.modal-success-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 12px;
+}
+
+.modal-success-desc {
+    font-size: 15px;
+    color: var(--color-text-sub);
+    line-height: 1.8;
+}
+
+/* 모달 반응형 */
+@media (max-width: 768px) {
+    .modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .modal-box {
+        border-radius: 20px 20px 0 0;
+        max-height: 88vh;
+    }
+
+    .diag-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .diag-result-highlight {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .drh-value { text-align: left; }
+
+    .diag-promo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .diag-promo .btn {
+        width: 100%;
+    }
+}
+
+/* ===== 진단 모달 보완 스타일 ===== */
+.modal-step {
+    padding: 24px;
+}
+
+.modal-success.modal-step {
+    padding: 56px 32px;
+}
+
+/* 인트로 */
+.diag-intro-icon {
+    font-size: 40px;
+    color: var(--color-navy);
+    margin-bottom: 16px;
+}
+
+.diag-intro-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.diag-intro-desc {
+    font-size: 14px;
+    color: var(--color-text-sub);
+    line-height: 1.75;
+    margin-bottom: 18px;
+}
+
+.diag-intro-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    background: rgba(31, 15, 114, 0.04);
+    border-radius: var(--radius);
+}
+
+.diag-intro-list li {
+    font-size: 14px;
+    color: var(--color-navy);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.diag-intro-list li i {
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+/* 질문 */
+.diag-q-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.diag-question {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1.45;
+    margin-bottom: 20px;
+}
+
+/* 결과 */
+.diag-result-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+}
+
+.diag-urgency-label,
+.diag-result-highlight-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.diag-urgency-label {
+    color: var(--color-primary);
+}
+
+.diag-urgency p:not(.diag-urgency-label) {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.7;
+}
+
+.diag-result-highlight-label {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.diag-result-highlight {
+    display: block;
+}
+
+.diag-result-highlight p:not(.diag-result-highlight-label) {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+.diag-result-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding: 10px 14px;
+    background: rgba(255, 107, 26, 0.08);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 폼 */
+.diag-required {
+    color: var(--color-primary);
+}
+
+.diag-agree-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--color-text-sub);
+    line-height: 1.6;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.diag-agree-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--color-navy);
+    cursor: pointer;
+}
+
+/* 아웃라인 버튼 */
+.btn-outline-navy {
+    background: transparent;
+    border: 2px solid var(--color-navy);
+    color: var(--color-navy);
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-navy:hover {
+    background: rgba(31, 15, 114, 0.06);
 }

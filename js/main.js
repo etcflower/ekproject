@@ -220,3 +220,120 @@ function escapeHtml(str) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 }
+
+/* ===== 30초 수익구조 진단 모달 ===== */
+const diagAnswers = {};
+
+function openModal() {
+    Object.keys(diagAnswers).forEach(k => delete diagAnswers[k]);
+    document.querySelectorAll('.modal-step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-0').style.display = 'block';
+    document.querySelectorAll('.diag-option').forEach(o => o.classList.remove('selected'));
+    [1, 2, 3].forEach(n => { const b = document.getElementById('next-' + n); if (b) b.disabled = true; });
+    ['f-name', 'f-phone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-time').value = '';
+    document.getElementById('f-agree').checked = false;
+    document.getElementById('diagModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('diagModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('diagModal')) closeModal();
+}
+
+function goStep(n) {
+    document.querySelectorAll('.modal-step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-' + n).style.display = 'block';
+}
+
+function selectOption(q, val, el) {
+    el.closest('.diag-options').querySelectorAll('.diag-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    diagAnswers[q] = val;
+    const nextBtn = document.getElementById('next-' + q.replace('q', ''));
+    if (nextBtn) nextBtn.disabled = false;
+}
+
+function showResult() {
+    document.querySelectorAll('.modal-step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-result').style.display = 'block';
+
+    const q1 = diagAnswers.q1 || '';
+    const q2 = diagAnswers.q2 || '';
+    const q3 = diagAnswers.q3 || '';
+
+    let badge, crisis, solution, value;
+
+    const isCritical = (q3 === '전혀 아니다') || (q2 === '바로 흔들린다');
+    const isMid      = (q3 === '애매하다')    || (q2 === '조금 영향 있다');
+
+    if (isCritical) {
+        badge    = '⚠ 지금 구조로는 매출이 멈출 수 있습니다';
+        crisis   = '학생은 있는데 수입이 안 되는 구조입니다. 강사 한 명에 매출이 흔들리고, 초등에서 중등으로 이어지지 않는 상태입니다.';
+        solution = '구조만 바꾸면 해결됩니다. 같은 공간에서 수익을 두 배로 늘릴 수 있는 구조가 있습니다.';
+        value    = q1 === '50명 이상' ? '순이익 최대 +1,550만원 추가 가능' : '순이익 최대 +770만원 추가 가능';
+    } else if (isMid) {
+        badge    = '구조는 있지만 ⚡ 시스템화가 안 된 상태입니다';
+        crisis   = '지금은 돌아가고 있지만, 강사 의존도가 높고 수입이 더 나올 수 있는 구조가 아닙니다.';
+        solution = '강사 역할을 분리하고 과목 구조를 정비하면 같은 인원으로도 수입이 달라집니다.';
+        value    = '강사 의존도 낮추고 이중 수입 구조 가능';
+    } else if (q3 === '만족한다' && q2 === '거의 없다') {
+        badge    = '현재 구조는 안정적입니다 → 확장이 관건입니다';
+        crisis   = '지금은 잘 굴러가고 있습니다. 하지만 같은 공간에서 수입을 두 배로 키울 수 있는 구조가 없습니다.';
+        solution = '초등 → 중등 → 고등 연결 구조로 확장하면 학생이 쌓이고 구조로 바뀝니다.';
+        value    = '동일 공간에서 수입 구조 추가 가능';
+    } else {
+        badge    = '지금 구조를 점검할 필요가 있습니다';
+        crisis   = '학생이 이어지고 있지만 구조적인 문제가 숨어 있을 수 있습니다.';
+        solution = '초등부터 고등까지 끊기지 않는 구조로 바꾸면 학생이 쌓입니다.';
+        value    = '구조 진단 후 맞춤 설계 제공';
+    }
+
+    document.getElementById('result-badge').textContent = badge;
+    document.getElementById('result-crisis').textContent = crisis;
+    document.getElementById('result-solution').textContent = solution;
+    document.getElementById('result-value').textContent = value;
+    document.getElementById('result-title').textContent = q1 ? q1 + ' 규모 진단 완료' : '진단 완료';
+}
+
+async function submitForm() {
+    const name  = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const agree = document.getElementById('f-agree').checked;
+    if (!name || !phone) { alert('이름과 연락처를 입력해주세요.'); return; }
+    if (!agree)          { alert('개인정보 수집에 동의해주세요.'); return; }
+
+    const btn = document.querySelector('#step-contact .btn-submit');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 저장 중...';
+    }
+
+    try {
+        await ConsultationAPI.create({
+            name,
+            phone,
+            preferred_time: document.getElementById('f-time').value || null,
+            diag_q1: diagAnswers.q1 || null,
+            diag_q2: diagAnswers.q2 || null,
+            diag_q3: diagAnswers.q3 || null,
+        });
+    } catch (err) {
+        console.error('상담 신청 저장 실패:', err);
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '상담 신청 완료 <i class="fas fa-check"></i>';
+        }
+    }
+
+    document.querySelectorAll('.modal-step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-done').style.display = 'block';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });

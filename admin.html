@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
@@ -52,57 +53,125 @@
         <main class="admin-main">
             <div class="admin-container">
 
-                <!-- 페이지 타이틀 -->
-                <div class="admin-page-head">
-                    <div>
-                        <h1>설명회 일정 관리</h1>
-                        <p>공개(1)로 설정된 일정 중 날짜 오름차순으로 메인 페이지에 최대 3개 노출됩니다.</p>
-                    </div>
-                    <button id="newSeminarBtn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> 새 일정 등록
+                <!-- 탭 네비게이션 -->
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="seminar">
+                        <i class="fas fa-calendar-alt"></i> 설명회 일정
+                    </button>
+                    <button class="admin-tab" data-tab="consultation">
+                        <i class="fas fa-comments"></i> 상담 신청 내역
+                        <span class="tab-badge" id="tabBadge" style="display:none">0</span>
                     </button>
                 </div>
 
-                <!-- 통계 -->
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <div class="stat-label">전체 일정</div>
-                        <div class="stat-value" id="statTotal">-</div>
+                <!-- ── 설명회 섹션 ── -->
+                <div id="seminarSection">
+
+                    <div class="admin-page-head">
+                        <div>
+                            <h1>설명회 일정 관리</h1>
+                            <p>공개(1)로 설정된 일정 중 날짜 오름차순으로 메인 페이지에 최대 3개 노출됩니다.</p>
+                        </div>
+                        <button id="newSeminarBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> 새 일정 등록
+                        </button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">공개</div>
-                        <div class="stat-value" id="statOpen">-</div>
+
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">전체 일정</div>
+                            <div class="stat-value" id="statTotal">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">공개</div>
+                            <div class="stat-value" id="statOpen">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">비공개</div>
+                            <div class="stat-value" id="statUpcoming">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">마감</div>
+                            <div class="stat-value" id="statClosed">-</div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">비공개</div>
-                        <div class="stat-value" id="statUpcoming">-</div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:90px;">공개여부</th>
+                                    <th>제목</th>
+                                    <th style="width:120px;">날짜</th>
+                                    <th style="width:80px;">시간</th>
+                                    <th style="width:100px;">상태</th>
+                                    <th style="width:80px;">정원</th>
+                                    <th style="width:140px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seminarTableBody">
+                                <tr><td colspan="7" class="loading-row">
+                                    <i class="fas fa-spinner fa-spin"></i> 불러오는 중...
+                                </td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">마감</div>
-                        <div class="stat-value" id="statClosed">-</div>
-                    </div>
+
                 </div>
 
-                <!-- 테이블 -->
-                <div class="admin-table-wrap">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th style="width:60px;">공개</th>
-                                <th>제목</th>
-                                <th style="width:120px;">날짜</th>
-                                <th style="width:80px;">시간</th>
-                                <th style="width:100px;">상태</th>
-                                <th style="width:80px;">정원</th>
-                                <th style="width:140px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody id="seminarTableBody">
-                            <tr><td colspan="7" class="loading-row">
-                                <i class="fas fa-spinner fa-spin"></i> 불러오는 중...
-                            </td></tr>
-                        </tbody>
-                    </table>
+                <!-- ── 상담신청 섹션 ── -->
+                <div id="consultationSection" style="display:none">
+
+                    <div class="admin-page-head">
+                        <div>
+                            <h1>상담 신청 내역</h1>
+                            <p>30초 진단을 통해 접수된 상담 신청 목록입니다. 상태를 변경하면 즉시 저장됩니다.</p>
+                        </div>
+                        <button id="refreshConsultBtn" class="btn" style="background:#fff;border:1px solid var(--color-border);color:var(--color-text);padding:10px 16px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;">
+                            <i class="fas fa-sync-alt"></i> 새로고침
+                        </button>
+                    </div>
+
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">전체</div>
+                            <div class="stat-value" id="cStatTotal">-</div>
+                        </div>
+                        <div class="stat-card" style="border-left-color:var(--color-primary)">
+                            <div class="stat-label">미확인</div>
+                            <div class="stat-value" id="cStatNew" style="color:var(--color-primary)">-</div>
+                        </div>
+                        <div class="stat-card" style="border-left-color:#2659D8">
+                            <div class="stat-label">연락완료</div>
+                            <div class="stat-value" id="cStatContacted" style="color:#2659D8">-</div>
+                        </div>
+                        <div class="stat-card" style="border-left-color:#2e7d32">
+                            <div class="stat-label">상담완료</div>
+                            <div class="stat-value" id="cStatDone" style="color:#2e7d32">-</div>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:130px;">접수일시</th>
+                                    <th style="width:80px;">이름</th>
+                                    <th style="width:130px;">연락처</th>
+                                    <th style="width:120px;">희망시간</th>
+                                    <th>진단 내용</th>
+                                    <th style="width:130px;">상태</th>
+                                    <th style="width:60px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="consultTableBody">
+                                <tr><td colspan="7" class="loading-row">
+                                    <i class="fas fa-spinner fa-spin"></i> 불러오는 중...
+                                </td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
 
             </div>

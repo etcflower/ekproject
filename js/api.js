@@ -81,11 +81,11 @@ class SupabaseAdapter {
         this.client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
-    async list({ sort = 'display_order' } = {}) {
+    async list({ sort = 'display_order', ascending = true } = {}) {
         const { data, error } = await this.client
             .from(this.tableName)
             .select('*')
-            .order(sort, { ascending: true });
+            .order(sort, { ascending });
         if (error) throw error;
         return data;
     }
@@ -134,7 +134,8 @@ class SupabaseAdapter {
 /* ============================================
  * Public API
  * ============================================ */
-const SeminarAPI = new SupabaseAdapter('seminars');
+const SeminarAPI       = new SupabaseAdapter('seminars');
+const ConsultationAPI  = new SupabaseAdapter('consultations');
 
-/* 전역으로 노출 */
-window.SeminarAPI = SeminarAPI;
+window.SeminarAPI      = SeminarAPI;
+window.ConsultationAPI = ConsultationAPI;

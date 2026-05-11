@@ -49,6 +49,7 @@ function bindEvents() {
     modalCancelBtn.addEventListener('click', closeModal);
     modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
     seminarForm.addEventListener('submit', handleSubmit);
+    document.getElementById('refreshConsultBtn').addEventListener('click', loadConsultations);
 }
 
 /* ============ 인증 ============ */
@@ -101,7 +102,9 @@ function showLogin() {
 function showAdmin() {
     loginScreen.style.display = 'none';
     adminScreen.style.display = 'block';
+    initTabs();
     loadList();
+    checkConsultBadge();
 }
 
 /* ============ 목록 로드 ============ */
@@ -136,23 +139,42 @@ function renderTable(list) {
             </td></tr>`;
         return;
     }
+    /* 메인 페이지에 실제 노출될 항목 ID 집합 (공개 + 날짜순 상위 3개) */
+    const mainIds = new Set(
+        list
+            .filter(x => x.display_order === 1)
+            .sort((a, b) => (a.seminar_date || '9999-99-99').localeCompare(b.seminar_date || '9999-99-99'))
+            .slice(0, 3)
+            .map(x => x.id)
+    );
+
     tableBody.innerHTML = list.map(item => {
-        const status = item.status || '접수중';
+        const status   = item.status || '접수중';
         const isPublic = item.display_order === 1;
+        const isMain   = mainIds.has(item.id);
+        const pubClass = isPublic ? 'pub-공개' : 'pub-비공개';
+        const id       = escapeHtml(String(item.id));
         return `
-            <tr>
-                <td>${isPublic ? '공개' : '비공개'}</td>
-                <td><strong>${escapeHtml(item.title || '')}</strong></td>
+            <tr class="${isMain ? 'row-main-exposed' : ''}">
+                <td>
+                    <select class="pub-select ${pubClass}" data-id="${id}">
+                        <option value="1" ${isPublic  ? 'selected' : ''}>공개</option>
+                        <option value="0" ${!isPublic ? 'selected' : ''}>비공개</option>
+                    </select>
+                </td>
+                <td>
+                    <strong>${escapeHtml(item.title || '')}</strong>
+                </td>
                 <td>${escapeHtml(item.seminar_date || '')}</td>
                 <td>${escapeHtml(item.seminar_time || '')}</td>
                 <td><span class="status-badge ${escapeHtml(status)}">${escapeHtml(status)}</span></td>
                 <td>${item.capacity ?? '-'}</td>
                 <td>
                     <div class="row-actions">
-                        <button class="btn-edit" data-id="${escapeHtml(item.id)}">
+                        <button class="btn-edit" data-id="${id}">
                             <i class="fas fa-pen"></i> 수정
                         </button>
-                        <button class="btn-delete" data-id="${escapeHtml(item.id)}">
+                        <button class="btn-delete" data-id="${id}">
                             <i class="fas fa-trash"></i> 삭제
                         </button>
                     </div>
@@ -161,7 +183,22 @@ function renderTable(list) {
         `;
     }).join('');
 
-    // 이벤트 바인딩
+    // 공개여부 즉시 변경
+    tableBody.querySelectorAll('.pub-select').forEach(sel => {
+        sel.addEventListener('change', async () => {
+            const newOrder = Number(sel.value);
+            sel.className = 'pub-select ' + (newOrder === 1 ? 'pub-공개' : 'pub-비공개');
+            try {
+                await SeminarAPI.update(sel.dataset.id, { display_order: newOrder });
+                showToast('공개여부가 변경되었습니다.', 'success');
+                const list = await SeminarAPI.list();
+                renderStats(list);
+            } catch (err) {
+                showToast('변경에 실패했습니다.', 'error');
+            }
+        });
+    });
+
     tableBody.querySelectorAll('.btn-edit').forEach(b => {
         b.addEventListener('click', () => openModal(b.dataset.id));
     });
@@ -299,4 +336,135 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+}
+
+/* ============ 탭 ============ */
+function initTabs() {
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.toggle('active', t === tab));
+            const isSeminar = tab.dataset.tab === 'seminar';
+            document.getElementById('seminarSection').style.display      = isSeminar ? 'block' : 'none';
+            document.getElementById('consultationSection').style.display = isSeminar ? 'none'  : 'block';
+            if (!isSeminar) loadConsultations();
+        });
+    });
+}
+
+/* ============ 상담 신청 내역 ============ */
+async function loadConsultations() {
+    const tbody = document.getElementById('consultTableBody');
+    tbody.innerHTML = `<tr><td colspan="7" class="loading-row">
+        <i class="fas fa-spinner fa-spin"></i> 불러오는 중...</td></tr>`;
+    try {
+        const list = await ConsultationAPI.list({ sort: 'created_at', ascending: false });
+        renderConsultTable(list);
+        renderConsultStats(list);
+    } catch (err) {
+        console.error(err);
+        tbody.innerHTML = `<tr><td colspan="7" class="empty-row">목록을 불러오지 못했습니다.</td></tr>`;
+        showToast('목록을 불러오지 못했습니다.', 'error');
+    }
+}
+
+function renderConsultTable(list) {
+    const tbody = document.getElementById('consultTableBody');
+    if (!list.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="empty-row">
+            <i class="far fa-inbox"></i> 접수된 상담 신청이 없습니다.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = list.map(item => {
+        const dt = item.created_at
+            ? new Date(item.created_at).toLocaleString('ko-KR', {
+                month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+              })
+            : '-';
+        const diagParts  = [item.diag_q1, item.diag_q2, item.diag_q3].filter(Boolean);
+        const diagShort  = diagParts.join(' · ') || '-';
+        const diagTitle  = `규모: ${item.diag_q1 || '-'}\n강사 의존도: ${item.diag_q2 || '-'}\n학년 연결도: ${item.diag_q3 || '-'}`;
+        const status     = item.status || '미확인';
+        const id         = escapeHtml(String(item.id));
+
+        return `
+            <tr>
+                <td style="white-space:nowrap;font-size:13px;color:var(--color-text-sub)">${escapeHtml(dt)}</td>
+                <td><strong>${escapeHtml(item.name)}</strong></td>
+                <td><a href="tel:${escapeHtml(item.phone)}" class="consult-phone">${escapeHtml(item.phone)}</a></td>
+                <td style="font-size:13px">${escapeHtml(item.preferred_time || '-')}</td>
+                <td><span class="consult-diag" title="${escapeHtml(diagTitle)}">${escapeHtml(diagShort)}</span></td>
+                <td>
+                    <select class="consult-status-select ${escapeHtml(status)}" data-id="${id}">
+                        <option value="미확인"  ${status === '미확인'  ? 'selected' : ''}>미확인</option>
+                        <option value="연락완료" ${status === '연락완료' ? 'selected' : ''}>연락완료</option>
+                        <option value="상담완료" ${status === '상담완료' ? 'selected' : ''}>상담완료</option>
+                        <option value="보류"    ${status === '보류'    ? 'selected' : ''}>보류</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="row-actions">
+                        <button class="btn-delete" data-id="${id}" title="삭제">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>`;
+    }).join('');
+
+    /* 상태 변경 */
+    tbody.querySelectorAll('.consult-status-select').forEach(sel => {
+        sel.addEventListener('change', async () => {
+            const newStatus = sel.value;
+            sel.className = 'consult-status-select ' + newStatus;
+            try {
+                await ConsultationAPI.update(sel.dataset.id, { status: newStatus });
+                showToast('상태가 변경되었습니다.', 'success');
+                const list = await ConsultationAPI.list({ sort: 'created_at', ascending: false });
+                renderConsultStats(list);
+            } catch (err) {
+                showToast('상태 변경에 실패했습니다.', 'error');
+            }
+        });
+    });
+
+    /* 삭제 */
+    tbody.querySelectorAll('.btn-delete').forEach(b => {
+        b.addEventListener('click', async () => {
+            if (!confirm('이 신청 내역을 삭제하시겠습니까?')) return;
+            try {
+                await ConsultationAPI.remove(b.dataset.id);
+                showToast('삭제되었습니다.', 'success');
+                loadConsultations();
+            } catch (err) {
+                showToast('삭제에 실패했습니다.', 'error');
+            }
+        });
+    });
+}
+
+function renderConsultStats(list) {
+    document.getElementById('cStatTotal').textContent     = list.length;
+    document.getElementById('cStatNew').textContent       = list.filter(x => x.status === '미확인').length;
+    document.getElementById('cStatContacted').textContent = list.filter(x => x.status === '연락완료').length;
+    document.getElementById('cStatDone').textContent      = list.filter(x => x.status === '상담완료').length;
+
+    const newCount = list.filter(x => x.status === '미확인').length;
+    const badge = document.getElementById('tabBadge');
+    if (badge) {
+        badge.textContent      = newCount;
+        badge.style.display    = newCount > 0 ? 'inline-flex' : 'none';
+    }
+}
+
+async function checkConsultBadge() {
+    try {
+        const list = await ConsultationAPI.list({ sort: 'created_at', ascending: false });
+        const newCount = list.filter(x => x.status === '미확인').length;
+        const badge = document.getElementById('tabBadge');
+        if (badge && newCount > 0) {
+            badge.textContent   = newCount;
+            badge.style.display = 'inline-flex';
+        }
+    } catch (e) { /* 조용히 무시 */ }
 }

@@ -460,6 +460,115 @@
     background: #2e7d32;
 }
 
+/* ===== Admin Tabs ===== */
+.admin-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.admin-tab {
+    padding: 10px 22px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-sub);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.admin-tab:hover {
+    color: var(--color-navy);
+}
+
+.admin-tab.active {
+    color: var(--color-navy);
+    border-bottom-color: var(--color-navy);
+}
+
+.tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ===== Consultation Table ===== */
+.consult-status-select {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.15s;
+}
+
+.consult-status-select.미확인  { background: #FFF1EB; color: var(--color-primary); border-color: rgba(255,107,26,0.35); }
+.consult-status-select.연락완료 { background: #E8F0FF; color: #2659D8; border-color: rgba(38,89,216,0.35); }
+.consult-status-select.상담완료 { background: #E8F5E9; color: #2e7d32; border-color: rgba(46,125,50,0.35); }
+.consult-status-select.보류    { background: #F0F0F0; color: #888;    border-color: #ddd; }
+
+/* ===== 메인 노출 표시 ===== */
+.row-main-exposed {
+    background: #fff !important;
+    border-left: 3px solid var(--color-navy);
+}
+
+.row-main-exposed td:first-child {
+    padding-left: 13px;
+}
+
+.admin-table tbody tr:not(.row-main-exposed) {
+    background: #F5F6FA;
+}
+
+.pub-select {
+    padding: 5px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.15s;
+}
+
+.pub-select.pub-공개   { background: #E8F5E9; color: #2e7d32; border-color: rgba(46,125,50,0.35); }
+.pub-select.pub-비공개 { background: #F0F0F0; color: #888;    border-color: #ddd; }
+
+.consult-phone {
+    color: var(--color-navy);
+    font-weight: 600;
+    text-decoration: none;
+}
+.consult-phone:hover { text-decoration: underline; }
+
+.consult-diag {
+    font-size: 12px;
+    color: var(--color-text-sub);
+    cursor: help;
+    line-height: 1.6;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .admin-stats {

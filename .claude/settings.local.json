@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(python -c \"from PIL import Image; img = Image.open\\(r'd:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\images\\\\hero.jpg'\\); print\\(img.size\\)\")",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"d:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\images\\\\hero.jpg\"\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"d:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\images\\\\hero.jpg\"\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "Bash(Select-String -Path \"d:\\\\_WORK\\\\260407_EK_PROJECT\\\\EK_PROJECT\\\\css\\\\style.css\" -Pattern \"modal-overlay|diag-promo|btn-outline-navy|diag-intro|modal-success|drb-badge|diag-urgency|diag-result-highlight|diag-result-value|diag-form-group|diag-agree|diag-q-label|diag-question|diag-result-eyebrow\")",
+      "Bash(Select-Object LineNumber, Line)",
+      "Bash(Format-Table -AutoSize)"
     ]
   }
 }

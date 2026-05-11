@@ -56,6 +56,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -102,10 +104,10 @@
                     <p class="hero-tag">영어 국어 통합 학원 모델</p>
                     <h1 class="hero-title">
                         <span class="hero-line-1">같은 공간<span class="hero-thin">에서</span></span>
-                        <span class="hero-line-2"><span class="hero-orange">수익</span><span class="hero-thin">은</span>
-                            <span class="hero-orange">두배로</span></span>
+                        <span class="hero-line-2"><span class="hero-orange">수익</span><span class="hero-orange-thin">은</span>
+                        <span class="hero-orange">두배</span><span class="hero-orange-thin">로</span></span>
                     </h1>
-                    <a href="#" class="btn btn-primary btn-large hero-cta">
+                    <a href="http://pf.kakao.com/_MZTZX/chat" class="btn btn-primary btn-large hero-cta">
                         내 학원 수익 구조 진단받기 <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -126,7 +128,7 @@
                             학생은 있는데<br>
                             <strong>왜 매출은 그대로입니까</strong>
                         </h2>
-                        <p>문제는 노력보다 구조입니다.</p>
+                        <p>문제는 노력보다 구조입니다</p>
                     </div>
                     <div class="prs-image">
                         <img src="images/about-meeting.jpg" alt="회의 장면">
@@ -142,8 +144,8 @@
                             <strong>학원은 두 배를 벌까요?</strong>
                         </h2>
                         <p>
-                            구조가 다르기 때문입니다.<br>
-                            지금 구조로는 절대 이 수익이 안 나옵니다.
+                            구조가 다르기 때문입니다<br>
+                            지금 구조로는 절대 이 수익이 안 나옵니다
                         </p>
                     </div>
                     <div class="prs-image">
@@ -159,10 +161,10 @@
                             초등부터 고등까지<br>
                             <strong>끊기지 않는 구조</strong>
                         </h2>
-                        <p>한 번 들어오면 계속 이어집니다.</p>
-                        <a href="#" class="btn btn-primary prs-cta">
+                        <p>한 번 들어오면 계속 이어집니다</p>
+                        <button class="btn btn-primary prs-cta" onclick="openModal()">
                             30초 수익구조 진단 시작하기 <i class="fas fa-chevron-right"></i>
-                        </a>
+                        </button>
                     </div>
                     <div class="prs-image">
                         <img src="images/franchise-bg.jpg" alt="가맹비 300만원 / 가맹 로열티 없음">
@@ -186,8 +188,8 @@
                         왜 매출은 그대로일까요
                     </h2>
                     <p class="section-desc">
-                        문제는 학생이 아니라 구조입니다.<br>
-                        이 상태로는 절대 바뀌지 않습니다.
+                        문제는 학생이 아니라 구조입니다<br>
+                        이 상태로는 절대 바뀌지 않습니다
                     </p>
                 </div>
 
@@ -215,37 +217,40 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- ============================================
+             04-2. ABOUT (같은 공간인데)
+             ============================================ -->
+        <section class="about-section-2">
+            <div class="container">
+
                 <!-- 두 번째 블록: 같은 공간인데 -->
-                <div class="section-head left mt-100">
+                <div class="section-head left">
                     <h2 class="section-title">
                         같은 공간인데, 왜 어떤<br>
                         학원은 두 배를 벌까요
                     </h2>
-                    <p class="section-desc">차이는 구조 하나입니다.</p>
+                    <p class="section-desc">차이는 구조 하나입니다</p>
                 </div>
 
                 <div class="about-num-grid">
                     <div class="about-num-card">
-                        <div class="about-num">
-                            <img src="images/num-01.png" alt="01">
-                        </div>
+                        <span class="about-num-badge">첫 번째</span>
                         <h3>학생이 쌓이지 않는 이유</h3>
                         <p>초등 → 중등 → 고등으로 이어지지 않습니다</p>
                         <p class="highlight">EK는 끊기지 않는 흐름을 만듭니다</p>
                     </div>
                     <div class="about-num-card">
-                        <div class="about-num">
-                            <img src="images/num-02.png" alt="02">
-                        </div>
+                        <span class="about-num-badge">두 번째</span>
                         <h3>왜 EK는 결과가 나오는가</h3>
                         <p>읽고 → 이해하고 → 정리</p>
                         <p class="highlight">EK는 성적으로 이어집니다</p>
                     </div>
                     <div class="about-num-card">
-                        <div class="about-num">
-                            <img src="images/num-03.png" alt="03">
-                        </div>
-                        <h3>원장 없어도 운영됩니다</h3>
+                        <span class="about-num-badge">세 번째</span>
+                        <h3>원장 없이도 운영됩니다</h3>
                         <p>강사가 바뀌어도 흔들리지 않습니다</p>
                         <p class="highlight">EK는 시스템으로 굴러갑니다</p>
                     </div>
@@ -291,7 +296,7 @@
                         학원이 돌아갑니다
                     </h2>
                     <p class="section-desc">
-                        수업, 관리, 1:1을 분리하면, 원장이 없어도 운영이 됩니다.
+                        수업, 관리, 1:1을 분리하면, 원장이 없어도 운영이 됩니다
                     </p>
                 </div>
 
@@ -350,8 +355,8 @@
                         수익은 다릅니다
                     </h2>
                     <p class="section-desc">
-                        지금 구조로는 절대 이 수익이 안 납니다.<br>
-                        <small>* 실제 운영 기준입니다. 임대 · 인건은 운영 방식에 따라 차이가 있습니다.</small>
+                        지금 구조로는 절대 이 수익이 안 납니다<br>
+                        <small>* 실제 운영 기준입니다 임대 · 인건은 운영 방식에 따라 차이가 있습니다</small>
                     </p>
                 </div>
 
@@ -579,14 +584,14 @@
                 <div class="section-head left">
                     <p class="section-tag orange">SUPPORT</p>
                     <h2 class="section-title">소형 학원도 바로<br>적용할 수 있습니다</h2>
-                    <p class="section-desc">처음이여도 됩니다. 4단계로 함께 만듭니다.</p>
+                    <p class="section-desc">처음이여도 됩니다 4단계로 함께 만듭니다</p>
                 </div>
 
                 <div class="support-grid">
                     <div class="support-card">
+                        <span class="step-num">STEP 01</span>
                         <div class="support-card-head">
-                            <span class="step-num">STEP 01</span>
-                            <h3>오픈 셋팅</h3>
+                            <h3>오픈 세팅</h3>
                             <p class="step-sub">처음부터 혼자 준비하지 않습니다</p>
                         </div>
                         <ul class="step-list">
@@ -594,13 +599,13 @@
                             <li>운영 구조 설계</li>
                             <li>교실 배치 및 초기 비용 설계</li>
                         </ul>
-                        <p class="step-highlight">→ 퀄리티 유지, 부담 감소</p>
+                        <p class="step-highlight">퀄리티 유지, 부담 감소</p>
                     </div>
 
                     <div class="support-card">
+                        <span class="step-num">STEP 02</span>
                         <div class="support-card-head">
-                            <span class="step-num">STEP 02</span>
-                            <h3>강사 셋팅</h3>
+                            <h3>강사 세팅</h3>
                             <p class="step-sub">강사가 없어도 시작 가능합니다</p>
                         </div>
                         <ul class="step-list">
@@ -608,12 +613,12 @@
                             <li>역할별 운영 가이드 제공</li>
                             <li>교체 시 재교육 지원</li>
                         </ul>
-                        <p class="step-highlight">→ 사람이 아니라 시스템으로 운영</p>
+                        <p class="step-highlight">사람이 아닌 시스템 운영</p>
                     </div>
 
                     <div class="support-card">
+                        <span class="step-num">STEP 03</span>
                         <div class="support-card-head">
-                            <span class="step-num">STEP 03</span>
                             <h3>운영 관리</h3>
                             <p class="step-sub">운영하면서 막히지 않게 합니다</p>
                         </div>
@@ -622,12 +627,12 @@
                             <li>문제 발생 시 즉시 대응</li>
                             <li>실제 운영 사례 공유</li>
                         </ul>
-                        <p class="step-highlight">→ 혼자 고민하지 않게 합니다</p>
+                        <p class="step-highlight">혼자 고민하지 않게 합니다</p>
                     </div>
 
                     <div class="support-card">
+                        <span class="step-num">STEP 04</span>
                         <div class="support-card-head">
-                            <span class="step-num">STEP 04</span>
                             <h3>모집 &amp; 유지</h3>
                             <p class="step-sub">학생 모집부터 유지까지 이어집니다</p>
                         </div>
@@ -636,7 +641,7 @@
                             <li>상담 흐름 가이드</li>
                             <li>재원율 유지 구조 설계</li>
                         </ul>
-                        <p class="step-highlight">→ 학생이 계속 이어지게 만듭니다</p>
+                        <p class="step-highlight">학생이 계속 이어지게 만듭니다</p>
                     </div>
                 </div>
             </div>
@@ -650,7 +655,7 @@
                 <div class="section-head left">
                     <p class="section-tag orange">SEMINAR SCHEDULE</p>
                     <h2 class="section-title">이번 달 마지막 설명회입니다</h2>
-                    <p class="section-desc">자리 마감 시, 더 이상 참여할 수 없습니다.</p>
+                    <p class="section-desc">자리 마감 시, 더 이상 참여할 수 없습니다</p>
                 </div>
 
                 <div class="seminar-grid" id="seminarGrid">
@@ -659,11 +664,16 @@
                     </div>
                 </div>
 
+                <div class="notice-consult">
+                    <p><strong>일정이 맞지 않으신가요?</strong></p>
+                    <p>1:1 개별 상담도 가능합니다 상담 신청 후 편하신 시간을 협의해 드립니다<br>(전화 문의: 010-4798-9421)</p>
+                </div>
+
                 <details class="seminar-notice">
                     <summary class="seminar-notice-summary">
                         <div class="notice-summary-left">
-                            <i class="fas fa-info-circle"></i>
-                            <span>일정 및 오시는 길 · 참석 안내</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>오시는 길 · 참석 안내</span>
                         </div>
                         <span class="notice-toggle-label">
                             <i class="fas fa-chevron-down notice-chevron"></i>
@@ -671,14 +681,6 @@
                     </summary>
                     <div class="seminar-notice-detail">
 
-                        <div class="notice-consult">
-                            <p><strong>일정이 맞지 않으신가요?</strong></p>
-                            <p>1:1 개별 상담도 가능합니다. 상담 신청 후 편하신 시간을 협의해 드립니다.<br>(전화 문의: 010-4798-9421)</p>
-                        </div>
-
-                        <div class="notice-section-head">
-                            <i class="fas fa-map-marker-alt"></i> 오시는 길 안내
-                        </div>
                         <div class="notice-address">
                             <i class="fas fa-building"></i>
                             충북 청주시 서원구 개신동 700 대상마스터빌딩 7층 EK프로젝트 개신학원
@@ -688,21 +690,21 @@
                                 <div class="route-icon"><i class="fas fa-car"></i></div>
                                 <div>
                                     <strong>자차 이용 시</strong>
-                                    <p>건물을 끼고 뒤편으로 들어오시면 지하주차장 이용 가능합니다.<br>주말에는 건물 주변 도로에 주차하셔도 일반적으로 단속은 없습니다.</p>
+                                    <p>건물을 끼고 뒤편으로 들어오시면 지하주차장 이용 가능합니다<br>주말에는 건물 주변 도로에 주차하셔도 일반적으로 단속은 없습니다</p>
                                 </div>
                             </div>
                             <div class="route-item">
                                 <div class="route-icon"><i class="fas fa-bus"></i></div>
                                 <div>
                                     <strong>시외버스 이용 시</strong>
-                                    <p>청주 시외버스터미널(가경터미널) 하차 후 택시로 약 5~10분 소요됩니다.</p>
+                                    <p>청주 시외버스터미널(가경터미널) 하차 후 택시로 약 5~10분 소요됩니다</p>
                                 </div>
                             </div>
                             <div class="route-item">
                                 <div class="route-icon"><i class="fas fa-train"></i></div>
                                 <div>
                                     <strong>KTX / SRT 이용 시</strong>
-                                    <p>오송역 하차 후 택시로 약 20~25분 소요됩니다.</p>
+                                    <p>오송역 하차 후 택시로 약 20~25분 소요됩니다</p>
                                 </div>
                             </div>
                         </div>
@@ -710,11 +712,11 @@
                         <div class="notice-caution">
                             <p class="caution-title"><i class="fas fa-exclamation-circle"></i> 안내 사항</p>
                             <ol>
-                                <li>설명회는 예정된 시간에 맞춰 정시에 바로 시작합니다.</li>
-                                <li>가시는 시간은 개인 일정에 맞춰 자유롭게 하셔도 되지만, 시작 시각만큼은 꼭 준수 부탁드립니다.</li>
-                                <li>아이들과 반려동물이 대기할 공간이 없습니다.</li>
-                                <li>참석 신청하신 분만 입장이 가능합니다.</li>
-                                <li>사정상 참석이 어려워지시거나 일정이 변경될 경우에는 꼭 미리 문자 부탁드립니다.</li>
+                                <li>설명회는 예정된 시간에 맞춰 정시에 바로 시작합니다</li>
+                                <li>가시는 시간은 개인 일정에 맞춰 자유롭게 하셔도 되지만, 시작 시각만큼은 꼭 준수 부탁드립니다</li>
+                                <li>아이들과 반려동물이 대기할 공간이 없습니다</li>
+                                <li>참석 신청하신 분만 입장이 가능합니다</li>
+                                <li>사정상 참석이 어려워지시거나 일정이 변경될 경우에는 꼭 미리 문자 부탁드립니다</li>
                             </ol>
                         </div>
 
@@ -731,7 +733,7 @@
                 <div class="section-head left">
                     <p class="section-tag orange">PROCESS</p>
                     <h2 class="section-title">가맹 절차</h2>
-                    <p class="section-desc">상담부터 개원까지 6단계, 본사가 함께 합니다.</p>
+                    <p class="section-desc">상담부터 개원까지 6단계, 본사가 함께 합니다</p>
                 </div>
 
                 <div class="process-grid">
@@ -787,7 +789,7 @@
                             <span class="orange">1년 뒤도 똑같습니다</span>
                         </h3>
                         <p>
-                            내년 이맘때도 같은 고민을 하고 계실겁니다.<br>
+                            내년 이맘때도 같은 고민을 하고 계실겁니다<br>
                             가맹 로열티 없이 지정 교재 사용 · 교재 및 운영 비용 별도 · 본사의 지속적인 업데이트와 관리 지원 포함
                         </p>
                     </div>
@@ -806,9 +808,9 @@
                                 <span class="cta-info-value"><strong>010-4798-9421</strong></span>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-large">
+                        <button class="btn btn-primary btn-large" onclick="openModal()">
                             30초 수익구조 진단 시작하기 <i class="fas fa-chevron-right"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -848,6 +850,147 @@
         <i class="fas fa-comment"></i>
         <span class="float-kakao-text">카카오 상담</span>
     </a>
+
+    <!-- ===== 30초 수익구조 진단 모달 ===== -->
+    <div id="diagModal" class="modal-overlay" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-label="30초 수익구조 진단">
+        <div class="modal-box">
+
+            <!-- 헤더 -->
+            <div class="modal-head">
+                <div>
+                    <p class="modal-head-label">무료 수익 진단</p>
+                    <p class="modal-head-title">30초 수익구조 진단하기</p>
+                </div>
+                <button class="modal-close" onclick="closeModal()" aria-label="닫기">&times;</button>
+            </div>
+
+            <!-- STEP 0: 인트로 -->
+            <div class="modal-step" id="step-0">
+                <div class="diag-intro-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="diag-intro-title">내 학원, 지금 수익 구조는 괜찮을까요?</h3>
+                <p class="diag-intro-desc">3가지 질문으로 30초 안에 확인합니다<br>결과와 함께 개선 방향을 바로 알려드립니다</p>
+                <ul class="diag-intro-list">
+                    <li><i class="fas fa-check-circle"></i> 완전 무료 · 개인정보 없이 즉시 진단</li>
+                    <li><i class="fas fa-check-circle"></i> 학원 규모별 맞춤 분석 제공</li>
+                    <li><i class="fas fa-check-circle"></i> 진단 후 전문가 상담 연결 가능</li>
+                </ul>
+                <button class="btn btn-primary btn-submit" onclick="goStep(1)">
+                    진단 시작하기 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- STEP 1: Q1 -->
+            <div class="modal-step" id="step-1" style="display:none">
+                <div class="diag-progress"><div class="diag-progress-bar" style="width:33%"></div></div>
+                <p class="diag-q-label">질문 1 / 3</p>
+                <h3 class="diag-question">현재 학원의 재원생 규모는?</h3>
+                <div class="diag-options">
+                    <button class="diag-option" onclick="selectOption('q1','10명 미만',this)">10명 미만</button>
+                    <button class="diag-option" onclick="selectOption('q1','10~30명',this)">10~30명</button>
+                    <button class="diag-option" onclick="selectOption('q1','30~50명',this)">30~50명</button>
+                    <button class="diag-option" onclick="selectOption('q1','50명 이상',this)">50명 이상</button>
+                </div>
+                <button class="btn btn-primary btn-submit" id="next-1" disabled onclick="goStep(2)">
+                    다음 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- STEP 2: Q2 -->
+            <div class="modal-step" id="step-2" style="display:none">
+                <div class="diag-progress"><div class="diag-progress-bar" style="width:66%"></div></div>
+                <p class="diag-q-label">질문 2 / 3</p>
+                <h3 class="diag-question">강사 1명이 그만두면 매출에 어떤 영향이 있나요?</h3>
+                <div class="diag-options">
+                    <button class="diag-option" onclick="selectOption('q2','바로 흔들린다',this)">바로 흔들린다</button>
+                    <button class="diag-option" onclick="selectOption('q2','조금 영향 있다',this)">조금 영향 있다</button>
+                    <button class="diag-option" onclick="selectOption('q2','거의 없다',this)">거의 없다</button>
+                </div>
+                <button class="btn btn-primary btn-submit" id="next-2" disabled onclick="goStep(3)">
+                    다음 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- STEP 3: Q3 -->
+            <div class="modal-step" id="step-3" style="display:none">
+                <div class="diag-progress"><div class="diag-progress-bar" style="width:100%"></div></div>
+                <p class="diag-q-label">질문 3 / 3</p>
+                <h3 class="diag-question">초등 학생이 중등·고등으로 자연스럽게 이어지고 있나요?</h3>
+                <div class="diag-options">
+                    <button class="diag-option" onclick="selectOption('q3','만족한다',this)">잘 이어진다</button>
+                    <button class="diag-option" onclick="selectOption('q3','애매하다',this)">애매하다</button>
+                    <button class="diag-option" onclick="selectOption('q3','전혀 아니다',this)">전혀 이어지지 않는다</button>
+                </div>
+                <button class="btn btn-primary btn-submit" id="next-3" disabled onclick="showResult()">
+                    결과 보기 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- STEP RESULT: 결과 -->
+            <div class="modal-step" id="step-result" style="display:none">
+                <p id="result-title" class="diag-result-eyebrow">진단 완료</p>
+                <div id="result-badge" class="drb-badge"></div>
+                <div class="diag-urgency">
+                    <p class="diag-urgency-label"><i class="fas fa-exclamation-triangle"></i> 현재 상황</p>
+                    <p id="result-crisis"></p>
+                </div>
+                <div class="diag-result-highlight">
+                    <p class="diag-result-highlight-label"><i class="fas fa-lightbulb"></i> 해결 방향</p>
+                    <p id="result-solution"></p>
+                </div>
+                <p class="diag-result-value"><i class="fas fa-chart-bar"></i> <span id="result-value"></span></p>
+                <button class="btn btn-primary btn-submit" onclick="goStep('contact')">
+                    맞춤 상담 신청하기 <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="btn btn-outline-navy btn-submit" style="margin-top:8px" onclick="closeModal()">
+                    닫기
+                </button>
+            </div>
+
+            <!-- STEP CONTACT: 상담 신청 -->
+            <div class="modal-step" id="step-contact" style="display:none">
+                <h3 class="diag-question" style="margin-bottom:6px">상담 신청</h3>
+                <p class="diag-intro-desc" style="margin-bottom:20px">진단 결과를 바탕으로 맞춤 상담을 드립니다</p>
+                <div class="diag-form-row">
+                    <div class="diag-form-group">
+                        <label class="diag-form-label">이름 <span class="diag-required">*</span></label>
+                        <input id="f-name" class="diag-form-input" type="text" placeholder="홍길동">
+                    </div>
+                    <div class="diag-form-group">
+                        <label class="diag-form-label">연락처 <span class="diag-required">*</span></label>
+                        <input id="f-phone" class="diag-form-input" type="tel" placeholder="010-0000-0000">
+                    </div>
+                </div>
+                <div class="diag-form-group" style="margin-bottom:16px">
+                    <label class="diag-form-label">희망 상담 시간</label>
+                    <select id="f-time" class="diag-form-select">
+                        <option value="">선택 (선택사항)</option>
+                        <option>오전 10시 ~ 12시</option>
+                        <option>오후 1시 ~ 3시</option>
+                        <option>오후 3시 ~ 5시</option>
+                        <option>오후 5시 ~ 7시</option>
+                    </select>
+                </div>
+                <label class="diag-agree-row">
+                    <input id="f-agree" type="checkbox">
+                    <span>개인정보 수집 및 이용에 동의합니다 <span class="diag-required">*</span></span>
+                </label>
+                <button class="btn btn-primary btn-submit" onclick="submitForm()">
+                    상담 신청 완료 <i class="fas fa-check"></i>
+                </button>
+            </div>
+
+            <!-- STEP DONE: 완료 -->
+            <div class="modal-step modal-success" id="step-done" style="display:none">
+                <div class="modal-success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3 class="modal-success-title">상담 신청이 완료되었습니다!</h3>
+                <p class="modal-success-desc">빠른 시일 내에 연락드리겠습니다<br>평균 응답 시간: 1영업일 이내</p>
+                <button class="btn btn-primary btn-submit" onclick="closeModal()">
+                    확인
+                </button>
+            </div>
+
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/api.js"></script>
