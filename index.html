@@ -81,7 +81,7 @@
                 </ul>
             </nav>
             <div class="header-cta">
-                <a href="http://pf.kakao.com/_MZTZX/chat" class="btn btn-kakao">
+                <a href="http://pf.kakao.com/_MZTZX/chat" class="btn btn-kakao" target="_blank" rel="noopener">
                     <i class="fas fa-comment"></i> 카카오로 상담하기
                 </a>
                 <a href="#seminar" class="btn btn-header-outline">설명회 신청</a>
@@ -107,7 +107,7 @@
                         <span class="hero-line-2"><span class="hero-orange">수익</span><span class="hero-orange-thin">은</span>
                         <span class="hero-orange">두배</span><span class="hero-orange-thin">로</span></span>
                     </h1>
-                    <a href="http://pf.kakao.com/_MZTZX/chat" class="btn btn-primary btn-large hero-cta">
+                    <a href="http://pf.kakao.com/_MZTZX/chat" class="btn btn-primary btn-large hero-cta" target="_blank" rel="noopener">
                         내 학원 수익 구조 진단받기 <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -379,7 +379,7 @@
                                 <tbody>
                                     <tr>
                                         <th>모집 인원</th>
-                                        <td>48명</td>
+                                        <td>24명</td>
                                     </tr>
                                     <tr>
                                         <th>매출</th>
@@ -413,7 +413,7 @@
                                 <tbody>
                                     <tr>
                                         <th>모집 인원</th>
-                                        <td>96명</td>
+                                        <td>48명</td>
                                     </tr>
                                     <tr>
                                         <th>매출</th>
@@ -938,7 +938,8 @@
                     <p id="result-solution"></p>
                 </div>
                 <p class="diag-result-value"><i class="fas fa-chart-bar"></i> <span id="result-value"></span></p>
-                <button class="btn btn-primary btn-submit" onclick="goStep('contact')">
+                <!-- [ROLLBACK] 기존: onclick="goStep('contact')" -->
+                <button class="btn btn-primary btn-submit" onclick="window.open('http://pf.kakao.com/_MZTZX/chat', '_blank')">
                     맞춤 상담 신청하기 <i class="fas fa-chevron-right"></i>
                 </button>
                 <button class="btn btn-outline-navy btn-submit" style="margin-top:8px" onclick="closeModal()">
